@@ -833,6 +833,7 @@ import UIKit
         }
 
         for (index, plot) in plots.enumerated() {
+            guard plot.shouldShowLabels else { continue }
             let labelPool = plotLabelPool[index]
 
             // Disable any labels for the deactivated points.
@@ -847,7 +848,6 @@ import UIKit
                 }
                 let label = labelPool.activateLabel(forPointIndex: point)
                 label.text = plotLabelText
-                label.isHidden = !dataSource.plotLabel(shouldShowPlotLabel: plot, atIndex: point)
                 label.textColor = plot.labelColor
                 label.font = plot.labelFont
 

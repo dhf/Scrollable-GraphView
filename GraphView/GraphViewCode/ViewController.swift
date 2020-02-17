@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     
     var label = UILabel()
     var reloadLabel = UILabel()
-    var showPlotLabel = UILabel()
 
     override var prefersStatusBarHidden : Bool {
         return true
@@ -31,8 +30,7 @@ class ViewController: UIViewController {
         
         addReloadLabel(withText: "RELOAD")
         addLabel(withText: "MULTI 1")
-        addShowPlotLabelsLabel(withText: "Show Plotlabels")
-        
+
         view.insertSubview(graphView, belowSubview: reloadLabel)
         
         setupConstraints()
@@ -103,26 +101,6 @@ class ViewController: UIViewController {
         view.addConstraints([leftConstraint, topConstraint, heightConstraint, widthConstraint])
     }
 
-    private func addShowPlotLabelsLabel(withText text: String) {
-
-        showPlotLabel.removeFromSuperview()
-        showPlotLabel = createLabel(withText: text)
-        showPlotLabel.isUserInteractionEnabled = true
-
-        let leftConstraint = NSLayoutConstraint(item: showPlotLabel, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 20)
-
-        let topConstraint = NSLayoutConstraint(item: showPlotLabel, attribute: .top, relatedBy: .equal, toItem: reloadLabel, attribute: .bottom, multiplier: 1, constant: 5)
-
-        let heightConstraint = NSLayoutConstraint(item: showPlotLabel, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 30)
-        let widthConstraint = NSLayoutConstraint(item: showPlotLabel, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: showPlotLabel.frame.width * 1.5)
-
-        let tapGestureRecogniser = UITapGestureRecognizer(target: self, action: #selector(showPlotLabelsDidTap))
-        showPlotLabel.addGestureRecognizer(tapGestureRecogniser)
-
-        view.insertSubview(showPlotLabel, aboveSubview: graphView)
-        view.addConstraints([leftConstraint, topConstraint, heightConstraint, widthConstraint])
-    }
-
 
     private func createLabel(withText text: String) -> UILabel {
         let label = UILabel()
@@ -167,7 +145,6 @@ class ViewController: UIViewController {
 
         addReloadLabel(withText: "RELOAD")
         addLabel(withText: currentGraphType.title)
-        addShowPlotLabelsLabel(withText: examples.showPlotLabels ? "Hide Plotlabels" : "Show Plotlabels")
 
         view.insertSubview(graphView, belowSubview: reloadLabel)
         
@@ -176,12 +153,6 @@ class ViewController: UIViewController {
     
     @objc func reloadDidTap(_ gesture: UITapGestureRecognizer) {
         examples.reload()
-        graphView.reload()
-    }
-
-    @objc func showPlotLabelsDidTap(_ gesture: UITapGestureRecognizer) {
-        examples.showPlotLabels.toggle()
-        showPlotLabel.text = examples.showPlotLabels ? "Hide Plotlabels" : "Show Plotlabels"
         graphView.reload()
     }
 }

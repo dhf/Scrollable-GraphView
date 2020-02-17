@@ -5,6 +5,7 @@ open class Plot {
     
     // The id for this plot. Used when determining which data to give it in the dataSource
     open var identifier: String!
+    open var shouldShowLabels: Bool = false
     
     weak var graphViewDrawingDelegate: ScrollableGraphViewDrawingDelegate! = nil
     

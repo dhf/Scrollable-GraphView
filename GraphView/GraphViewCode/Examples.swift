@@ -10,7 +10,6 @@ import UIKit
 class Examples : ScrollableGraphViewDataSource {
     // MARK: Data Properties
     public var showPlotLabels: Bool = false
-    private let canDisplayPlotLabel = ["simple", "darkLine", "bar", "dot", "pinkLine", "multiBlue", "multiOrange"]
     
     private var numberOfDataItems = 29
 
@@ -47,10 +46,6 @@ class Examples : ScrollableGraphViewDataSource {
 
     func plotLabel(forPlot plot: Plot, atIndex pointIndex: Int) -> String? {
         return "\(dataValue(forPlot: plot, atIndex: pointIndex))"
-    }
-
-    func plotLabel(shouldShowPlotLabel plot: Plot, atIndex pointIndex: Int) -> Bool {
-        return showPlotLabels && canDisplayPlotLabel.contains(plot.identifier)
     }
 
     func numberOfPoints() -> Int {
@@ -127,6 +122,7 @@ class Examples : ScrollableGraphViewDataSource {
         
         blueLinePlot.lineColor = UIColor.colorFromHex(hexString: "#16aafc")
         blueLinePlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
+        blueLinePlot.shouldShowLabels = true
         blueLinePlot.labelVerticalOffset = -10
         blueLinePlot.labelColor = .white
         
@@ -144,6 +140,7 @@ class Examples : ScrollableGraphViewDataSource {
         orangeLinePlot.lineColor = UIColor.colorFromHex(hexString: "#ff7d78")
         orangeLinePlot.adaptAnimationType = ScrollableGraphViewAnimationType.elastic
         orangeLinePlot.labelVerticalOffset = -10
+        orangeLinePlot.shouldShowLabels = true
         orangeLinePlot.labelColor = .white
 
         // squares on the line
